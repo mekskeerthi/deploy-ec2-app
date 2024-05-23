@@ -36,7 +36,7 @@ jobs:
       - name: Delete old container
         run: docker rm -f deploy-ec2-container
       - name: Run docker container
-        run: docker -d -p 8085:8085 --name deploy-ec2-container mekselva/deploy-ec2-image:latest
+        run: docker run -d -p 8085:8085 --name deploy-ec2-container mekselva/deploy-ec2-image:latest
  
 
 
