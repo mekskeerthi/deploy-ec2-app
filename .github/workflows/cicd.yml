@@ -8,7 +8,7 @@ on:
     brances: [ "main" ]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
- # This workflow contains a single job called "build"
+ # This workflow contains a single job called "build" ,"deploy"
   build:
     runs-on: [ ubuntu-latest ]
     steps:
@@ -23,12 +23,10 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}}  -p ${{secrets.DOCKER_PASSWORD}}
-
       - name: Build docker image
         run: docker build -t mekselva/deploy-ec2-image .
       - name: Publish image to docker hub
         run: docker push mekselva/deploy-ec2-image:latest
-
   deploy:
     needs: build
     runs-on: [aws-ec2]
